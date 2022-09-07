@@ -1,6 +1,6 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
-import calendar
+from  calendar import month_abbr
 
 fields = {'Id':0, 'Date':1, 'Trx':2}
 date = {'Month':0,'Day':1}
@@ -67,8 +67,8 @@ if __name__== "__main__":
     #Testing porpouses
     monthly = get_monthly_info("txns.csv")
     print('Total balance: {} '.format(get_total_balance(monthly)))
-    print('Number of trx in {}: '.format(calendar.month_abbr[7]),monthly['trx_qtty'][7-1])
-    print('Number of trx in {}: '.format(calendar.month_abbr[8]),monthly['trx_qtty'][8-1])
+    print('Number of trx in {}: '.format(month_abbr[7]),monthly['trx_qtty'][7-1])
+    print('Number of trx in {}: '.format(month_abbr[8]),monthly['trx_qtty'][8-1])
     print('Average debit amount: {} '.format(get_average_amount(monthly, 'debit')))
     print('Average debit amount: {} '.format(get_average_amount(monthly, 'credit')))
     print('Average XXX amount: {} '.format(get_average_amount(monthly, 'XXx')))
