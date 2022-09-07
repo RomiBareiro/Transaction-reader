@@ -38,6 +38,11 @@ def get_total_balance(month_trx):
     return sum(month_trx['debit']) + sum(month_trx['credit'])
 
 def get_total_type_trx(month_trx, trx_type):
+    """ Get count  of credit or debit trx
+    Arg:
+    month_trx : trx information
+    trx_type : credit or debit
+    """
     if trx_type != 'debit' and trx_type != 'credit':
         return "Trx not allowed"
     count = 0
