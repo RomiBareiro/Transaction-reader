@@ -1,2 +1,7 @@
 Tech_Challenge_-_Software_Engineer.pdf
 __pycache__/
+lib/
+bin/
+pyvenv.cfg
+share/
+lib64
