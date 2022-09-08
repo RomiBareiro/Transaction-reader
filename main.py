@@ -14,20 +14,35 @@ flags.DEFINE_string('email_pwd', None, 'Email password')
 flags.DEFINE_string('dest_email', None, 'Destination email')
 flags.DEFINE_enum('job', 'running', ['running', 'stopped'], 'Job status.')
 
-def main(argv):
+def check_flags():
+    """Check if we have all params to run
+    """
     if FLAGS.csv_path is None:
-        print("No file path defined")
+            print("No file path defined")
+            return -1
+    if FLAGS.sender_email is None:
+        print("No sender email defined")
         return -1
-    else:
-        print("path: ", FLAGS.csv_path)
-        account_info = trx_process.get_monthly_info(FLAGS.csv_path)
+    if FLAGS.email_pwd is None:
+        print("No sender email password defined")
+        return -1
+    if FLAGS.dest_email is None:
+        print("No destination email defined")
+        return -1
+    return 0
 
-        if account_info == -1:
-            return account_info
+def main(argv):
+    if check_flags() != 0:
+        return -1
 
-        emailInfo = EmailInfo(account_info, FLAGS.sender_email,
-        FLAGS.email_pwd, FLAGS.dest_email)
-        emailInfo.create_email_content()
+    account_info = trx_process.get_monthly_info(FLAGS.csv_path)
+
+    if account_info == -1:
+        return account_info
+
+    emailInfo = EmailInfo(account_info, FLAGS.sender_email,
+    FLAGS.email_pwd, FLAGS.dest_email)
+    emailInfo.create_email_content()
     
 if __name__ == '__main__':
   app.run(main)
