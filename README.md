@@ -6,10 +6,12 @@ https://hub.docker.com/repository/docker/romibareiro/stori01
 Or
 
 # Clone repository and install:
-pip3 install -r requirements.txt
+<code>pip3 install -r requirements.txt</code>
 
 # Run:
-python3  main.py -csv_path=PATH_TO_CSV -sender_email=EMAIL_SENDER -dest_email=EMAIL_DESTINATION -email_pwd=EMAIL_SENDER_PWD -user_name=USER_NAME
+
+<code>python3  main.py -csv_path=PATH_TO_CSV -sender_email=EMAIL_SENDER -dest_email=EMAIL_DESTINATION -email_pwd=EMAIL_SENDER_PWD -user_name=USER_NAME
+</code>
 
 # You will receive an email like this: 
 
