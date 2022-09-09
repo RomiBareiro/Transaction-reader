@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
-
+import logging
 from  calendar import month_abbr
+
+logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.ERROR)
 
 fields = {'Id':0, 'Date':1, 'Trx':2}
 date = {'Month':0,'Day':1}
@@ -14,7 +16,7 @@ def get_monthly_info(file_name):
     try:
         with open(file_name) as file:
             columns = file.readline().split(',')
-            print("columns: ", columns)
+            logging.debug("columns: ", columns)
             trx_qtty , debit_amount, credit_amount= [0]*12, [0]*12, [0]*12
             rows = file.readlines()
             for elem in rows:
@@ -27,11 +29,11 @@ def get_monthly_info(file_name):
                 else:
                     credit_amount[req_month-1] += trx_value
             month_trx = dict(zip(trx_results,[ trx_qtty, debit_amount, credit_amount]))
-            print(month_trx)
+            logging.debug(month_trx)
             return month_trx
 
     except EnvironmentError:
-         print("File could'nt be opened")
+         logging.error("File could'nt be opened")
          return -1
 
 def get_total_balance(account_info):

@@ -9,7 +9,9 @@ Or
 <code>pip3 install -r requirements.txt</code>
 
 # Run:
-<code>python3  main.py -csv_path=PATH_TO_CSV -sender_email=EMAIL_SENDER -dest_email=EMAIL_DESTINATION -email_pwd=EMAIL_SENDER_PWD</code>
+
+<code>python3  main.py -csv_path=PATH_TO_CSV -sender_email=EMAIL_SENDER -dest_email=EMAIL_DESTINATION -email_pwd=EMAIL_SENDER_PWD -user_name=USER_NAME
+</code>
 
 # You will receive an email like this: 
 
