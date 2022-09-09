@@ -13,6 +13,9 @@ Or
 <code>python3  main.py -csv_path=PATH_TO_CSV -sender_email=EMAIL_SENDER -dest_email=EMAIL_DESTINATION -email_pwd=EMAIL_SENDER_PWD -user_name=USER_NAME
 </code>
 
+Note: if your email sender is a gmal account, you must get app password from gmail settings.
+If you want to build the docker image, you need to change the flags values in CMD ( PATH_TO_CSV, EMAIL_SENDER, EMAIL_DESTINATION,EMAIL_SENDER_PWD,USER_NAME)
+
 # You will receive an email like this: 
 
 
