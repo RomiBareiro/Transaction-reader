@@ -6,19 +6,19 @@ https://hub.docker.com/repository/docker/romibareiro/stori01
 Or
 
 # Clone repository and install:
-<text>pip3 install -r requirements.txt</text>
+<code>pip3 install -r requirements.txt</code>
 
 # Load env variables:
 Create an .env file with this content:
 
-<code>
+<text>
 CSV_PATH=CSV_PATH
 SENDER_EMAIL=SENDER_EMAIL
 DEST_EMAIL=DEST_EMAIL
 EMAIL_PWD=EMAIL_PWD
 USER_NAME=USER_NAME
 MONGODB_CONNSTRING=MONGODB_CONNSTRING
-</code>
+</text>
 
 # And then run:
 <code>python3  main.py
