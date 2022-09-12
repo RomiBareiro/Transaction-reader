@@ -8,7 +8,7 @@ Or
 # Clone repository and install:
 <text>pip3 install -r requirements.txt</text>
 
-# Run:
+# Load env variables:
 Create an .env file with this content:
 
 <code>
@@ -19,6 +19,7 @@ EMAIL_PWD=EMAIL_PWD
 USER_NAME=USER_NAME
 </code>
 
+# And then run:
 <code>python3  main.py
 </code>
 
