@@ -1,18 +1,16 @@
 import pymongo
-import logging
+from logging import debug
 
-def insert_historic_balance(balance_info):
-
-    print(balance_info)
-    client = pymongo.MongoClient('mongodb://localhost:27017/')
+def insert_historic_balance(balance_info, conn_string='mongodb://localhost:27017'):
+    debug("conn string: ", conn_string)
+    client = pymongo.MongoClient(conn_string)
 
     balance_db = client['historial']
-
     collection = balance_db["customers"]
 
     x = collection.insert_one(balance_info)
     
-    logging.debug(x.inserted_id) 
+    debug(x.inserted_id) 
 
     return x.inserted_id
 

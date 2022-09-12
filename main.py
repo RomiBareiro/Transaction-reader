@@ -17,6 +17,8 @@ def main():
     EMAIL_PWD = os.getenv('EMAIL_PWD')
     DEST_EMAIL = os.getenv('DEST_EMAIL')
     USER_NAME = os.getenv('USER_NAME')
+    MONGODB_CONNSTRING = os.getenv('MONGODB_CONNSTRING')
+
     account_info = {'user_name':USER_NAME}
 
     transactions = trx_process.get_monthly_info(CSV_PATH)
@@ -31,7 +33,7 @@ def main():
     
     account_info['email_date'] = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
-    if insert_historic_balance(account_info) == None:
+    if insert_historic_balance(account_info, MONGODB_CONNSTRING) == None:
         logging.error("Email information couldn't be saved")
         return -1
     

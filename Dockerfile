@@ -10,4 +10,4 @@ COPY . ./
 
 RUN python -m pip install --no-cache-dir --upgrade -r /usr/app/src/requirements.txt
 
-CMD [ "python", "main.py"]
+ENTRYPOINT [ "python", "main.py"]
