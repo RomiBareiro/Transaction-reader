@@ -17,11 +17,13 @@ SENDER_EMAIL=SENDER_EMAIL
 DEST_EMAIL=DEST_EMAIL
 EMAIL_PWD=EMAIL_PWD
 USER_NAME=USER_NAME
+MONGODB_CONNSTRING=MONGODB_CONNSTRING
 </code>
 
 # And then run:
 <code>python3  main.py
 </code>
+
 
 Note: if your email sender is a gmal account, you must get app password from gmail settings.
 If you want to build the docker image, you need to change the flags values in .env ( PATH_TO_CSV, EMAIL_SENDER, EMAIL_DESTINATION,EMAIL_SENDER_PWD,USER_NAME)

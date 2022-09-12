@@ -5,3 +5,5 @@ bin/
 pyvenv.cfg
 share/
 lib64
+result.json
+.env

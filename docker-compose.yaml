@@ -4,6 +4,11 @@ services:
   stori:
     image: stori
     env_file: .env
-    build:
-      context: .
-      network: host
+    #build:
+    #  context: .
+    #  network: host
+    ports:
+      - 3000:3000
+      - 27017:27017
+  mongodb:
+    image: mongo:latest
