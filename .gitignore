@@ -7,3 +7,4 @@ share/
 lib64
 result.json
 .env
+mongo connection
