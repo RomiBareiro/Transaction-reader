@@ -3,7 +3,8 @@
 ## Brief intro
 - This app read a .csv file that contains trx information, send a formatted email with this content and load the information into a Mongodb cluster.
 - Info will be stored this way (in a json file) : 
-</br> <code>{"_id":{"$oid":"631f76822c59d71b033bdaa8"},"user_name":"romina ivanna bareiro","trx_qtty":[0,0,0,0,0,0,2,2,0,0,0,0],"debit":[0,0,0,0,0,0,-10.3,-20.46,0,0,0,0],"credit":[0,0,0,0,0,0,60.5,10.0,0,0,0,0]}</code>
+</br> <code>{"_id":{"$oid":"631f4bdfb01fc30b3d3345ae"},"user_name":"TESTING","trx_qtty":[0,0,0,0,0,0,2,2,0,0,0,0],"debit":[0,0,0,0,0,0,-10.3,-20.46,0,0,0,0],"credit":[0,0,0,0,0,0,60.5,10.0,0,0,0,0],"email_date":"12/09/2022 15:10:23"}
+</code>
 
 ## Tech
 - Mongodb 
