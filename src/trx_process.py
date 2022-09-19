@@ -8,33 +8,36 @@ fields = {'Id':0, 'Date':1, 'Trx':2}
 date = {'Month':0,'Day':1}
 trx_results = ('trx_qtty','debit','credit')
 
-def get_monthly_info(file_name):
+def get_csv_file(file_name):
+    file =  open(file_name)
+    if file is None:
+        logging.error("File couldn't be opened")
+        return -1
+    return file
+
+def get_monthly_info(file_handler):
     """Returns trx information of every month in a dictionary
        Arguments:
        file_name : Path to CSV file
     """
-    try:
-        with open(file_name) as file:
-            columns = file.readline().split(',')
-            logging.debug("columns: ", columns)
-            trx_qtty , debit_amount, credit_amount= [0]*12, [0]*12, [0]*12
-            rows = file.readlines()
-            for elem in rows:
-                req_month = int(elem.split(',')[fields['Date']].split('/')[date['Month']])
-                trx_qtty[req_month-1] +=1
-                trx_value = float(elem.split(',')[fields['Trx']].replace("\n",""))
-                
-                if trx_value < 0.0:
-                    debit_amount[req_month-1] += trx_value
-                else:
-                    credit_amount[req_month-1] += trx_value
-            month_trx = dict(zip(trx_results,[ trx_qtty, debit_amount, credit_amount]))
-            logging.debug(month_trx)
-            return month_trx
+    columns = file_handler.readline().split(',')
+    logging.debug("columns: ", columns)
+    trx_qtty , debit_amount, credit_amount= [0]*12, [0]*12, [0]*12
+    rows = file_handler.readlines()
+    for elem in rows:
+        req_month = int(elem.split(',')[fields['Date']].split('/')[date['Month']])
+        trx_qtty[req_month-1] +=1
+        trx_value = float(elem.split(',')[fields['Trx']].replace("\n",""))
+        
+        if trx_value < 0.0:
+            debit_amount[req_month-1] += trx_value
+        else:
+            credit_amount[req_month-1] += trx_value
+    month_trx = dict(zip(trx_results,[ trx_qtty, debit_amount, credit_amount]))
+    logging.debug(month_trx)
+    file_handler.close()
+    return month_trx
 
-    except EnvironmentError:
-         logging.error("File could'nt be opened")
-         return -1
 
 def get_total_balance(account_info):
     """Get total account balance
