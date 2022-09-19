@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import trx_process
+from src import trx_process
 from calendar import month_abbr
 from email.message import EmailMessage
 import smtplib
@@ -16,6 +16,10 @@ class  EmailInfo:
         self.dest_email = dest_email
         self.subject = subject
         self.user = user
+        self.msg = EmailMessage()
+        self.msg['Subject'] = self.subject
+        self.msg['From'] = self.sender_email 
+        self.msg['To'] = self.dest_email 
 
     def total_balance(self):
         return ('Total balance: $ {} '.format(round(trx_process.get_total_balance(self.account_info),2)))
@@ -33,24 +37,34 @@ class  EmailInfo:
         return "Hi {}!, here is your monthly account information ".format(self.user)
 
     def create_email_content(self):
-        msg = EmailMessage()
-        msg['Subject'] = self.subject
-        msg['From'] = self.sender_email 
-        msg['To'] = self.dest_email 
-        balance_info = '''<h2 style="text-align:center;">{}</h2>
-                         <div style="background-color:#81f463 ;"><h3>{}</h3><h3>{}</h3></div>'''.format(self.total_balance(), 
+        balance_info = self.format_balance_info(self.total_balance(), 
                         self.average_debit_amount(),
                         self.average_credit_amount())
-        logging.debug("balance_info: ", balance_info)
 
+        monthly_info = self.format_monthly_info(self.account_info['trx_qtty'])
+
+        content = self.create_content(balance_info, monthly_info)
+        logging.debug(content)
+        self.msg.set_content(content, subtype='html')
+
+
+    def format_balance_info(self, total_balance,average_debit_amount, average_credit_amount):
+        return '''<h2 style="text-align:center;">{}</h2>
+                            <div style="background-color:#81f463 ;"><h3>{}</h3><h3>{}</h3></div>'''.format(total_balance, 
+                            average_debit_amount,
+                            average_credit_amount)
+
+    def format_monthly_info(self, trx_qtty):
         monthly_info = ''
-        for i, elem in enumerate(self.account_info['trx_qtty']):
+        for i, elem in enumerate(trx_qtty):
             if elem !=0:
-               monthly_info += '''<h3>{}</h3>'''.format(self.trx_number_month(i+1))
+                monthly_info += '''<h3>{}</h3>'''.format(self.trx_number_month(i+1))
         if monthly_info == '':
             monthly_info = "<h2>No registered transactions</h2>"
-        monthly_info = '''<div style="background-color:#f463cd;">{}</div>'''.format(monthly_info)
-        content = '''<!DOCTYPE html>
+        return '''<div style="background-color:#f463cd;">{}</div>'''.format(monthly_info)
+
+    def create_content(self, balance, monthly_info):
+        return '''<!DOCTYPE html>
         <html>
             <body>
                 <div style="background-color:#63f4f1;padding:10px 20px;">
@@ -69,13 +83,13 @@ class  EmailInfo:
                     </div>
                 </div>
             </body>
-        </html>'''.format(self.hello_user(),balance_info, monthly_info)
-        logging.debug(content)
-        msg.set_content(content, subtype='html')
+        </html>'''.format(self.hello_user(), balance, monthly_info)
+    
+    def send_email(self):
         try:
             with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
                 smtp.login(self.sender_email, self.password) 
-                smtp.send_message(msg)
+                smtp.send_message(self.msg)
         except:
             logging.critical("Email couldn't be sent")
             return -1
