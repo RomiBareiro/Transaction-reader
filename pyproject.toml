@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "trx-reader-demo"
+version = "0.1.0"
+description = "This app reads a .csv file that contains trx information, send a formatted email with this content and load the information into a Mongodb cluster"
+authors = ["Romina Bareiro <100946603+RomiBareiro@users.noreply.github.com>"]
+readme = "README.md"
+packages = [{include = "trx_reader_demo"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
