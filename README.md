@@ -11,12 +11,16 @@
 - Docker
 - Docker compose
 - Python 3.8.10
+- Poetry
 
 # Download docker container from DockerHub:
 https://hub.docker.com/repository/docker/romibareiro/stori01
 
 Or
+## Get package from Pypi
+<code>pip install trx-reader-demo</code>
 
+Or
 ## Clone repository and install:
 <code>pip3 install -r requirements.txt</code>
 
