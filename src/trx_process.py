@@ -21,14 +21,13 @@ def get_monthly_info(file_handler):
        file_name : Path to CSV file
     """
     columns = file_handler.readline().split(',')
-    logging.debug("columns: ", columns)
     trx_qtty , debit_amount, credit_amount= [0]*12, [0]*12, [0]*12
     rows = file_handler.readlines()
     for elem in rows:
         req_month = int(elem.split(',')[fields['Date']].split('/')[date['Month']])
         trx_qtty[req_month-1] +=1
         trx_value = float(elem.split(',')[fields['Trx']].replace("\n",""))
-        
+
         if trx_value < 0.0:
             debit_amount[req_month-1] += trx_value
         else:
@@ -71,12 +70,10 @@ def get_average_amount(account_info, trx_type):
     return(sum(account_info[trx_type])/total_type_trx)
 
 if __name__== "__main__":
-    #Testing porpouses
     account_info = get_monthly_info("txns.csv")
-    print('Total balance: {} '.format(get_total_balance(account_info)))
-    print('Number of trx in {}: '.format(month_abbr[7]),account_info['trx_qtty'][7-1])
-    print('Number of trx in {}: '.format(month_abbr[8]),account_info['trx_qtty'][8-1])
-    print('Average debit amount: {} '.format(get_average_amount(account_info, 'debit')))
-    print('Average debit amount: {} '.format(get_average_amount(account_info, 'credit')))
-    print('Average XXX amount: {} '.format(get_average_amount(account_info, 'XXx')))
-
+    logging.debug('Total balance: {} '.format(get_total_balance(account_info)))
+    logging.debug('Number of trx in {}:'.format(month_abbr[7]),account_info['trx_qtty'][7-1])
+    logging.debug('Number of trx in {}:'.format(month_abbr[8]),account_info['trx_qtty'][8-1])
+    logging.debug('Average debit amount: {} '.format(get_average_amount(account_info, 'debit')))
+    logging.debug('Average debit amount: {} '.format(get_average_amount(account_info, 'credit')))
+    logging.debug('Average XXX amount: {} '.format(get_average_amount(account_info, 'XXx')))

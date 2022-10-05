@@ -2,12 +2,13 @@
 import os
 from datetime import  datetime
 import logging
-from src import save_in_cluster, EmailInfo, trx_process
 from envparse import env
+from src import save_in_cluster, EmailInfo, trx_process
 
 logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.ERROR)
 class Environment:
-    def __init__( self,CSV_PATH, SENDER_EMAIL,EMAIL_PWD, DEST_EMAIL, USER_NAME, MONGODB_CONNSTRING ):
+    def __init__( self,CSV_PATH, SENDER_EMAIL,EMAIL_PWD, DEST_EMAIL,
+                 USER_NAME, MONGODB_CONNSTRING ):
         self.csv_path = CSV_PATH
         self.sender_email = SENDER_EMAIL
         self.email_pwd = EMAIL_PWD
@@ -19,9 +20,9 @@ def main():
     if os.path.isfile('.env') is False:
         logging.error(".env file not found")
         return -1
-        
+
     env.read_envfile()
-    envir = check_flags() 
+    envir = check_flags()
 
     if envir == -1:
         logging.error("Couldn't read flags")
@@ -40,15 +41,13 @@ def main():
     account_info.update(transactions)
     emailInfo = EmailInfo(account_info, envir.sender_email,
     envir.email_pwd,envir.dest_email, envir.user_name)
-
-    emailInfo.create_email_content() 
-
+    emailInfo.create_email_content()
     if emailInfo.send_email() == -1:
         return -1
 
     account_info['email_date'] = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
-    if save_in_cluster(account_info, envir.mongo_conn) == None:
+    if save_in_cluster(account_info, envir.mongo_conn) is None:
         logging.error("Email information couldn't be saved")
         return -1
 
