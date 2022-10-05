@@ -1,5 +1,4 @@
 envparse==0.2.0
 pymongo==4.2.0
-absl-py==1.2.0
 dnspython==2.2.1
 
