@@ -43,4 +43,5 @@ If you want to build the docker image, you need to change the flags values in .e
 ## You will receive an email like this: 
 
 
-![index](https://user-images.githubusercontent.com/100946603/189212924-1cd51e00-cfa7-4c53-8ebd-18bd6328c7e8.jpeg)
+![image](https://user-images.githubusercontent.com/100946603/194079425-a45a3e33-2d02-4a83-8420-c7f5ab72a80e.png)
+
