@@ -8,3 +8,5 @@ lib64
 result.json
 .env
 mongo connection
+dist/trx_reader_demo-0.1.0-py3-none-any.whl
+dist/trx-reader-demo-0.1.0.tar.gz
